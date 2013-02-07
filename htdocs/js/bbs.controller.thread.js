@@ -19,13 +19,15 @@ if (! bbs.controller) bbs.controller = {};
         /**
          * Index action
          *
-         * @param {Integer}   Category id
+         * @param {Integer}   Thread id
          */
-        index: function(category_id) {
+        index: function(thread_id) {
 
-            var params = {
-                category_id: category_id
-            };
+            var that = this,
+                params = {
+                    thread_id: thread_id
+                };
+
             // fetch thread data from API
             bbs.apiclient.requestGet(this.url.get, params, function(data) {
                 var threadModel = bbs.model.thread;
@@ -33,6 +35,19 @@ if (! bbs.controller) bbs.controller = {};
 
                 // Pass to view
                 bbs.view.thread.refreshView(threadModel.toArray());
+
+                that.bindEvents();
+            });
+        },
+
+        bindEvents: function() {
+            var $root = $('#bbs-contents');
+
+            // click category link
+            $root.find('li.thread').find('a').click(function() {
+                var $this = $(this);
+                var thread_id = $this.parents('li.thread').find('input.id').val();
+                bbs.router.change('/post/' + thread_id);
             });
         }
     };

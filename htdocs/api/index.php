@@ -21,6 +21,10 @@ $app->get('/bbs/post/', function () use ($bbs) {
 			"id"   => 1,
 			"title" => 'post1',
 			"contents" => 'This is post1',
+			"user" => array(
+				"name" => "tanakayuki",
+				"thumbnail" => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/369081_100001956302461_1189839344_q.jpg',
+			),
 			"update_date" => "2013-02-07 10:00:00",
 			"create_date" => "2013-02-07 10:00:00"
 		),
@@ -28,6 +32,10 @@ $app->get('/bbs/post/', function () use ($bbs) {
 			"id"   => 2,
 			"title" => 'post2',
 			"contents" => 'This is post1',
+			"user" => array(
+				"name" => "tanakayuki",
+				"thumbnail" => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/369081_100001956302461_1189839344_q.jpg',
+			),
 			"update_date" => "2013-02-07 10:00:00",
 			"create_date" => "2013-02-07 10:00:00"
 		),
@@ -35,6 +43,10 @@ $app->get('/bbs/post/', function () use ($bbs) {
 			"id"   => 3,
 			"title" => 'post3',
 			"contents" => 'This is post3',
+			"user" => array(
+				"name" => "tanakayuki",
+				"thumbnail" => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/369081_100001956302461_1189839344_q.jpg',
+			),
 			"update_date" => "2013-02-07 10:00:00",
 			"create_date" => "2013-02-07 10:00:00"
 		),
@@ -42,6 +54,10 @@ $app->get('/bbs/post/', function () use ($bbs) {
 			"id"   => 4,
 			"title" => 'post4',
 			"contents" => 'This is post4',
+			"user" => array(
+				"name" => "tanakayuki",
+				"thumbnail" => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/369081_100001956302461_1189839344_q.jpg',
+			),
 			"update_date" => "2013-02-07 10:00:00",
 			"create_date" => "2013-02-07 10:00:00"
 		),
@@ -49,9 +65,13 @@ $app->get('/bbs/post/', function () use ($bbs) {
 			"id"   => 5,
 			"title" => 'post5',
 			"contents" => 'This is post5',
+			"user" => array(
+				"name" => "tanakayuki",
+				"thumbnail" => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/369081_100001956302461_1189839344_q.jpg',
+			),
 			"update_date" => "2013-02-07 10:00:00",
 			"create_date" => "2013-02-07 10:00:00"
-		),
+		)
 	));
 });
 

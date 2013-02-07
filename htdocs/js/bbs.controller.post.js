@@ -5,31 +5,36 @@ if (! bbs.controller) bbs.controller = {};
 
 
     /**
-     * Category controller
+     * Post controller
      *
-     * @require bbs.model.category
-     * @require bbs.view.category
+     * @require bbs.model.post
+     * @require bbs.view.post
      */
-    var CategoryController = function() {};
+    var PostController = function() {};
 
-    CategoryController.prototype = {
+    PostController.prototype = {
         url: {
-            get: '/api/bbs/category/'
+            get: '/api/bbs/post/'
         },
 
         /**
          * Index action
+         *
+         * @param {Integer}   Thread id
          */
-        index: function() {
-            var that = this;
+        index: function(thread_id) {
+            var that = this,
+                params = {
+                    thread_id: thread_id
+                };
 
-            // fetch category data from API
-            bbs.apiclient.requestGet(this.url.get, {}, function(data) {
-                var categoryModel = bbs.model.category;
-                categoryModel.populate(data);
+            // fetch post data from API
+            bbs.apiclient.requestGet(this.url.get, params, function(data) {
+                var postModel = bbs.model.post;
+                postModel.populate(data);
 
                 // Pass to view
-                bbs.view.category.refreshView(categoryModel.toArray());
+                bbs.view.post.refreshView(postModel.toArray());
 
                 that.bindEvents();
             });
@@ -37,16 +42,9 @@ if (! bbs.controller) bbs.controller = {};
 
         bindEvents: function() {
             var $root = $('#bbs-contents');
-
-            // click category link
-            $root.find('li.category').find('a').click(function() {
-                var $this = $(this);
-                var category_id = $this.parents('li.category').find('input.id').val();
-                bbs.router.change('/thread/' + category_id);
-            });
         }
     };
 
-    bbs.controller.category = new CategoryController();
+    bbs.controller.post = new PostController();
 
 })(this.jQuery, this);

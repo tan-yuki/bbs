@@ -49,6 +49,9 @@
 					<div class="clearfix thread-container">
 						<a href="javascript:void(0);">${thread.name}</a>
 					</div>
+					<div class="hidden-param">
+						<input type="hidden" class="id" value="${id}" />
+					</div>
 				</li>
 				{{/each}}
 			</ul>
@@ -94,10 +97,13 @@
 		<script type="text/javascript" src="/js/bbs.apiclient.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="/js/bbs.model.category.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="/js/bbs.model.thread.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/bbs.model.post.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="/js/bbs.view.category.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="/js/bbs.view.thread.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/bbs.view.post.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="/js/bbs.controller.category.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="/js/bbs.controller.thread.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/bbs.controller.post.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="/js/bbs.js" charset="UTF-8"></script>
 	</body>
 </html>

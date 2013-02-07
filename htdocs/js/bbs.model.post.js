@@ -3,6 +3,6 @@ if (! bbs.model) bbs.model = {};
 
 (function($, __global__) {
 
-    bbs.model.category = Model.create();
+    bbs.model.post = Model.create();
 
 })(this.jQuery, this);
