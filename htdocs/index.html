@@ -1,53 +1,103 @@
 <!DOCTYPE>
 <html>
 	<head>
-		<title>TODO List</title>
-		<link href="./css/lib/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
-		<link href="./css/lib/bootstrap-responsive.min.css" media="screen" rel="stylesheet" type="text/css">
-		<link rel="stylesheet/less" type="text/css" href="./css/styles.less" />
+		<title>BBS</title>
+		<link href="/css/lib/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
+		<link href="/css/lib/bootstrap-responsive.min.css" media="screen" rel="stylesheet" type="text/css">
+		<link href="/css/styles.less" rel="stylesheet/less" type="text/css" />
 	</head>
 	<body>
 		<div id="container">
 			<div id="menubar" class="navbar">
 				<div class="navbar-inner">
 					<div class="container">
-						<a class="brand" href="/">TODO</a>
+						<a class="brand" href="/">BBS</a>
 					</div>
 				</div>
-				<h1>TODO List</h1>
 			</div>
-			<div id="todo-contents" class="container">
-				<div id="todo-inner">
-					<div id="task-list-wrapper">
-						<ul id="task-list">
-						</ul>
-					</div>
-					<div id="add-task"><a href="javascript:void(0);">Add</a></div>
-				</div>
+			<div id="bbs-contents" class="container">
 			</div>
 		</div><!-- / #container -->
-	
-		<script id="task-tmpl" type="text/x-jquery-tmpl">
-			<li id="${_id}" class="task">
-				<div class="clearfix task-container">
-					<div class="task-check">
-						<input type="checkbox" id="${id}" {{if checked}}checked{{/if}}>
-						<label for="${id}"></label>
+
+		<!-- category template -->
+		<script id="category-tmpl" type="text/x-jquery-tmpl">
+			<div id="category-header">
+				<h1>Category list</h1>
+			</div>
+			<ul id="category-list">
+				{{each(i, category) categories}}
+				<li id="${category._id}" class="category">
+					<div class="clearfix thread-container">
+						<a href="javascript:void(0);">${category.name}</a>
 					</div>
-					<div class="task-contents">
-						<a href="javascript:void(0);">${title}</a>
-						<input style="display:none;" type="text" val="${title}">
+					<div class="hidden-param">
+						<input type="hidden" class="id" value="${id}" />
 					</div>
-				</div>
-			</li>
+				</li>
+				{{/each}}
+			</ul>
 		</script>
-		<script type="text/javascript" src="./js/lib/less.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="./js/lib/jquery.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="./js/lib/jquery.cookie.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="./js/lib/jquery.tmpl.min.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="./js/lib/bootstrap.min.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="./js/lib/model/src/model.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="./js/lib/StateMachine/src/StateMachine.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="./js/init.js" charset="UTF-8"></script>
+
+		<!-- thread template -->
+		<script id="thread-tmpl" type="text/x-jquery-tmpl">
+			<div id="thread-header">
+				<h1>Thread list</h1>
+			</div>
+			<ul id="thread-list">
+				{{each(i, thread) threads}}
+				<li id="${thread._id}" class="thread">
+					<div class="clearfix thread-container">
+						<a href="javascript:void(0);">${thread.name}</a>
+					</div>
+				</li>
+				{{/each}}
+			</ul>
+		</script>
+
+		<!-- post template -->
+		<script id="post-tmpl" type="text/x-jquery-tmpl">
+			<ul id="post-list">
+				{{each(i, post) posts}}
+				<li id="${post._id}" class="post">
+					<div class="clearfix post-container">
+						<div class="post-header">
+							<ul>
+								<li class="poster-thumbnail"><img src="${post.user.thumbnail}" alt="${post.user.name}"></li>
+								<li class="post-title">${post.title}</li>
+								<li class="post-date">${post.update_date}</li>
+							</ul>
+						</div>
+						<div class="post-body">
+							<div class="post-contents">
+								<p>${post.contents}</p>
+								<textarea style="display:none;">${post.contents}</textarea>
+							</div>
+						</div>
+					</div>
+				</li>
+				{{/each}}
+			</ul>
+		</script>
+
+
+		<!-- js libraries -->
+		<script type="text/javascript" src="/js/lib/less.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/lib/jquery.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/lib/jquery.cookie.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/lib/jquery.tmpl.min.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/lib/bootstrap.min.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/lib/kazitori/src/js/kazitori.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/lib/model/src/model.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/lib/StateMachine/src/StateMachine.js" charset="UTF-8"></script>
+
+		<!-- js for bbs -->
+		<script type="text/javascript" src="/js/bbs.apiclient.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/bbs.model.category.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/bbs.model.thread.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/bbs.view.category.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/bbs.view.thread.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/bbs.controller.category.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/bbs.controller.thread.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/js/bbs.js" charset="UTF-8"></script>
 	</body>
 </html>
