@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>TODO List</title>
+		<link href="./css/lib/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
+		<link href="./css/lib/bootstrap-responsive.min.css" media="screen" rel="stylesheet" type="text/css">
+		<link rel="stylesheet/less" type="text/css" href="./css/styles.less" />
+	</head>
+	<body>
+		<div id="container">
+			<div id="menubar" class="navbar">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="brand" href="/">TODO</a>
+					</div>
+				</div>
+				<h1>TODO List</h1>
+			</div>
+			<div id="todo-contents" class="container">
+				<div id="todo-inner">
+					<div id="task-list-wrapper">
+						<ul id="task-list">
+						</ul>
+					</div>
+					<div id="add-task"><a href="javascript:void(0);">Add</a></div>
+				</div>
+			</div>
+		</div><!-- / #container -->
+	
+		<script id="task-tmpl" type="text/x-jquery-tmpl">
+			<li id="${_id}" class="task">
+				<div class="clearfix task-container">
+					<div class="task-check">
+						<input type="checkbox" id="${id}" {{if checked}}checked{{/if}}>
+						<label for="${id}"></label>
+					</div>
+					<div class="task-contents">
+						<a href="javascript:void(0);">${title}</a>
+						<input style="display:none;" type="text" val="${title}">
+					</div>
+				</div>
+			</li>
+		</script>
+		<script type="text/javascript" src="./js/lib/less.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="./js/lib/jquery.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="./js/lib/jquery.cookie.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="./js/lib/jquery.tmpl.min.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="./js/lib/bootstrap.min.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="./js/lib/model/src/model.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="./js/lib/StateMachine/src/StateMachine.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="./js/init.js" charset="UTF-8"></script>
+	</body>
+</html>
