@@ -1,0 +1,9 @@
+[submodule "htdocs/js/lib/StateMachine"]
+	path = htdocs/js/lib/StateMachine
+	url = https://github.com/tan-yuki/StateMachine.git
+[submodule "htdocs/js/lib/model"]
+	path = htdocs/js/lib/model
+	url = https://github.com/tan-yuki/model.js.git
+[submodule "htdocs/js/lib/kazitori"]
+	path = htdocs/js/lib/kazitori
+	url = https://github.com/glassesfactory/kazitori.js.git
