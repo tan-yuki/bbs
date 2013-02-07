@@ -64,10 +64,15 @@
 				<li id="${post._id}" class="post">
 					<div class="clearfix post-container">
 						<div class="post-header">
-							<ul>
-								<li class="poster-thumbnail"><img src="${post.user.thumbnail}" alt="${post.user.name}"></li>
-								<li class="post-title">${post.title}</li>
-								<li class="post-date">${post.update_date}</li>
+							<ul class="clearfix">
+								<li class="poster-thumbnail-dummy">
+									<div>&nbsp;</div>
+								</li>
+								<li class="poster-thumbnail">
+									<img class="user-img-${post.user.id}" style="display:none;" alt="${post.user.name}">
+								</li>
+								<li class="post-title">title: ${post.title}</li>
+								<li class="post-date">update date: ${post.update_date}</li>
 							</ul>
 						</div>
 						<div class="post-body">

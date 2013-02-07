@@ -1,24 +1,5 @@
-@image-dark-color:   #007730;
-@image-color:        #228A4C;
-@image-bright-color: #63DB93;
+@post-header-bg-color: rgb(3, 66, 102);
 
-@checkbox-width: 48px;
-@checkbox-margin: 10px;
-
-@task-whole-width: @checkbox-margin + @checkbox-width + @task-width;
-@task-height: 50px;
-@task-width: 400px;
-@task-font-size: 150%;
-@task-padding: 10px;
-
-@task-background-width: @task-width + 150px;
-@task-background-padding: 30px;
-
-@imgurl-checkbox-unchecked: url(../img/checkbox_unchecked.png);
-@imgurl-checkbox-checked: url(../img/checkbox_checked.png);
-@imgurl-edit: url(../img/edit.png);
-
-@edit-icon-width: 72px;
 
 .border-radius (@radius) {
 	border-radius: @radius;
@@ -49,5 +30,52 @@ h1 {
 }
 
 #bbs-contents {
-	text-align: center;
+}
+
+
+/*  ==== Posts list page  ==== */
+#post-list {
+	div.post-container {
+		width: 80%;
+
+		div.post-header {
+			color: #eee;
+			ul {
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				background-color: @post-header-bg-color;
+
+				li {
+					float: left;
+					margin: 0;
+					padding: 0;
+					width: 15%;
+
+					img {
+						width: 30px;
+					}
+
+					&.poster-thumbnail-dummy {
+						div {
+							width: 30px;
+							height: 30px;
+						}
+					}
+
+					&.post-date {
+						width: 25%;
+					}
+				}
+			}
+		}
+
+		div.post-body {
+			div.post-contents {
+				p {
+					padding: 20px 30px;
+				}
+			}
+		}
+	}
 }

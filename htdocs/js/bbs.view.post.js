@@ -7,6 +7,8 @@ if (! bbs.view) bbs.view = {};
 
     PostView.prototype = {
         refreshView: function(data) {
+
+            // cache img
             var html = $('#post-tmpl').tmpl({posts: data});
             $('#bbs-contents').html(html);
         }

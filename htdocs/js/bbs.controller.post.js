@@ -3,6 +3,11 @@ if (! bbs.controller) bbs.controller = {};
 
 (function($, __global__) {
 
+    /**
+     * (key, value) = ([user id]: [thumnail image object])
+     */
+    var thumbnailCache = {};
+
 
     /**
      * Post controller
@@ -33,8 +38,36 @@ if (! bbs.controller) bbs.controller = {};
                 var postModel = bbs.model.post;
                 postModel.populate(data);
 
+                // cache user thumbnail
+                for (var i = 0, len = data.length; i < len; i++) {
+                    var record = data[i],
+                        userId = record.user.id,
+                        thumbUrl = record.user.thumbnail;
+
+                    if (! thumbnailCache[userId]) {
+                        var img = new Image();
+                        img.src = thumbUrl;
+                        thumbnailCache[userId] = img;
+                    }
+                }
+
+
                 // Pass to view
                 bbs.view.post.refreshView(postModel.toArray());
+
+                // set user thumbnail
+                var $root = $('#bbs-contents');
+                for (var userId in thumbnailCache) {
+                    var img = thumbnailCache[userId];
+                    var $userThumnbs = $root.find('img.user-img-' + userId);
+                    if ($userThumnbs.length) {
+                        $userThumnbs.attr('src', img.src).show();
+
+                        img.onload = function() {
+                            $userThumnbs.parents('li.poster-thumbnail').prev().hide();
+                        };
+                    }
+                }
 
                 that.bindEvents();
             });

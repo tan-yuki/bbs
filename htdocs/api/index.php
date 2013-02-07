@@ -22,6 +22,7 @@ $app->get('/bbs/post/', function () use ($bbs) {
 			"title" => 'post1',
 			"contents" => 'This is post1',
 			"user" => array(
+				"id" => 1,
 				"name" => "tanakayuki",
 				"thumbnail" => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/369081_100001956302461_1189839344_q.jpg',
 			),
@@ -33,6 +34,7 @@ $app->get('/bbs/post/', function () use ($bbs) {
 			"title" => 'post2',
 			"contents" => 'This is post1',
 			"user" => array(
+				"id" => 1,
 				"name" => "tanakayuki",
 				"thumbnail" => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/369081_100001956302461_1189839344_q.jpg',
 			),
@@ -44,6 +46,7 @@ $app->get('/bbs/post/', function () use ($bbs) {
 			"title" => 'post3',
 			"contents" => 'This is post3',
 			"user" => array(
+				"id" => 1,
 				"name" => "tanakayuki",
 				"thumbnail" => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/369081_100001956302461_1189839344_q.jpg',
 			),
@@ -55,6 +58,7 @@ $app->get('/bbs/post/', function () use ($bbs) {
 			"title" => 'post4',
 			"contents" => 'This is post4',
 			"user" => array(
+				"id" => 1,
 				"name" => "tanakayuki",
 				"thumbnail" => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/369081_100001956302461_1189839344_q.jpg',
 			),
@@ -66,6 +70,7 @@ $app->get('/bbs/post/', function () use ($bbs) {
 			"title" => 'post5',
 			"contents" => 'This is post5',
 			"user" => array(
+				"id" => 1,
 				"name" => "tanakayuki",
 				"thumbnail" => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash4/369081_100001956302461_1189839344_q.jpg',
 			),
