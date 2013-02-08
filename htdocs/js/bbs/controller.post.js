@@ -19,15 +19,17 @@ if (! bbs.controller) bbs.controller = {};
 
     PostController.prototype = {
         url: {
-            get: '/api/bbs/post/'
+            get:  '/api/bbs/post/',
+            save: '/api/bbs/post/save/'
         },
 
         /**
          * Index action
          *
+         * @param {Integer}   Category id
          * @param {Integer}   Thread id
          */
-        index: function(thread_id) {
+        index: function(category_id, thread_id) {
             var that = this,
                 params = {
                     thread_id: thread_id
@@ -41,8 +43,8 @@ if (! bbs.controller) bbs.controller = {};
                 // cache user thumbnail
                 for (var i = 0, len = data.length; i < len; i++) {
                     var record = data[i],
-                        userId = record.user.id,
-                        thumbUrl = record.user.thumbnail;
+                        userId = record.user_id,
+                        thumbUrl = record.user_thumbnail;
 
                     if (! thumbnailCache[userId]) {
                         var img = new Image();
@@ -53,7 +55,13 @@ if (! bbs.controller) bbs.controller = {};
 
 
                 // Pass to view
-                bbs.view.post.refreshView(postModel.toArray());
+                var params = {
+                    category_id: category_id,
+                    thread_id:   thread_id,
+                    posts:       postModel.toArray()
+                };
+                bbs.view.post.refreshView(params);
+                that.bindEvents(category_id, thread_id);
 
                 // set user thumbnail
                 var $root = $('#bbs-contents');
@@ -61,21 +69,55 @@ if (! bbs.controller) bbs.controller = {};
                     var img = thumbnailCache[userId];
                     var $userThumnbs = $root.find('img.user-img-' + userId);
                     if ($userThumnbs.length) {
-                        $userThumnbs.attr('src', img.src).show();
-
-                        img.onload = function() {
-                            $userThumnbs.parents('li.poster-thumbnail').prev().hide();
-                        };
+                        $userThumnbs.attr('src', img.src);
                     }
                 }
-
-                that.bindEvents();
             });
         },
 
-        bindEvents: function() {
-            var $root = $('#bbs-contents');
+        bindEvents: function(category_id, thread_id) {
+            $('#add-new-post-link-container').click(function(e) {
+                bbs.router.change('/category/' + category_id + '/thread/' + thread_id + '/post/add/');
+            });
+        },
+
+        add: function(category_id, thread_id) {
+            bbs.view.post.add();
+            this.bindAddModelEvents(category_id, thread_id);
+        },
+
+        bindAddModelEvents: function(category_id, thread_id) {
+            var that = this;
+            var $modal = $('#modal-root');
+            var $input = $('#new-thread-name');
+
+
+            // submit saving thread
+            $modal.find('#post-add-btn').click(function() {
+                if (! $input.val()) {
+                    return false;
+                }
+
+                var params = {
+                    user_id:     $('#user_id').val(),
+                    thread_id:   thread_id,
+                };
+
+                $modal.find('.post-data').each(function() {
+                    var $this = $(this);
+                    params[$this.attr('name')] = $this.val();
+                });
+
+                bbs.apiclient.requestPost(that.url.save, params, function() {
+                    $modal.modal('hide');
+                });
+            });
+            // when close modal
+            $modal.on('hidden', function() {
+                bbs.router.change('/category/' + category_id + '/thread/');
+            });
         }
+
     };
 
     bbs.controller.post = new PostController();

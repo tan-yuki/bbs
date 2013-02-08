@@ -30,6 +30,9 @@ h1 {
 }
 
 #bbs-contents {
+	p.back {
+		padding-top: 50px;
+	}
 }
 
 
@@ -51,16 +54,19 @@ h1 {
 					margin: 0;
 					padding: 0;
 					width: 15%;
+					border: 3px solid @post-header-bg-color;
 
 					img {
 						width: 30px;
+						height: 30px;
 					}
 
-					&.poster-thumbnail-dummy {
-						div {
-							width: 30px;
-							height: 30px;
-						}
+					&.poster-thumbnail {
+						width: 40px;
+					}
+
+					&.poster-name {
+						width: 170px;
 					}
 
 					&.post-date {
@@ -71,11 +77,34 @@ h1 {
 		}
 
 		div.post-body {
+			border: 3px solid @post-header-bg-color;
 			div.post-contents {
 				p {
 					padding: 20px 30px;
 				}
 			}
 		}
+	}
+}
+
+#add-new-post-link-container {
+	position: absolute;
+	top: 90px;
+	right: 70px;
+	width: 150px;
+	height: 50px;
+	background-color: #eee;
+	cursor: pointer;
+
+	p {
+		padding-top: 14px;
+		text-align: center;
+	}
+}
+
+#post-add-modal-body {
+	textarea {
+		width: 35em;
+		height: 10em;
 	}
 }

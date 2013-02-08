@@ -9,7 +9,18 @@ if (! bbs.view) bbs.view = {};
         refreshView: function(data) {
 
             // cache img
-            var html = $('#post-tmpl').tmpl({posts: data});
+            var html = $('#post-tmpl').tmpl(data);
+            $('#bbs-contents').html(html);
+        },
+
+        add: function(category_id) {
+            var html = $('#post-modal-add-tmpl').tmpl();
+            var $root = $('#modal-root');
+            $root.html(html).modal();
+        },
+
+        notfound: function(data) {
+            var html = $('#thread-notfound-tmpl').tmpl(data);
             $('#bbs-contents').html(html);
         }
     };

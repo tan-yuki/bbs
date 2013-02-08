@@ -8,14 +8,18 @@ if (! window.bbs) bbs = {};
     };
     Router.prototype = $.extend(true, {}, Kazitori.prototype, {
         routes: {
-            '':                           'index',
-            '/':                          'index',
-            '/category':                  'category',
-            '/category/':                 'category',
-            '/thread/<int:category_id>':  'thread',
-            '/thread/<int:category_id>/': 'thread',
-            '/post/<int:thread_id>':      'post',
-            '/post/<int:thread_id>/':     'post'
+            '':                                                              'index',
+            '/':                                                             'index',
+            '/category':                                                     'category',
+            '/category/':                                                    'category',
+            '/category/<int:category_id>/thread':                            'thread',
+            '/category/<int:category_id>/thread/':                           'thread',
+            '/category/<int:category_id>/thread/add':                        'addThread',
+            '/category/<int:category_id>/thread/add/':                       'addThread',
+            '/category/<int:category_id>/thread/<int:thread_id>/post':       'post',
+            '/category/<int:category_id>/thread/<int:thread_id>/post/':      'post',
+            '/category/<int:category_id>/thread/<int:thread_id>/post/add':   'addPost',
+            '/category/<int:category_id>/thread/<int:thread_id>/post/add/':  'addPost',
         },
         index: function() {
             this.change('/category/');
@@ -23,11 +27,17 @@ if (! window.bbs) bbs = {};
         category: function() {
             bbs.controller.category.index();
         },
-        post: function(thread_id) {
-            bbs.controller.post.index(thread_id);
+        post: function(category_id, thread_id) {
+            bbs.controller.post.index(category_id, thread_id);
         },
         thread: function(category_id) {
             bbs.controller.thread.index(category_id);
+        },
+        addThread: function(category_id) {
+            bbs.controller.thread.add(category_id);
+        },
+        addPost: function(category_id, thread_id) {
+            bbs.controller.post.add(category_id, thread_id);
         }
     });
 

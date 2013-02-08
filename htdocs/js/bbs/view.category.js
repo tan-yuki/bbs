@@ -12,7 +12,7 @@ if (! bbs.view) bbs.view = {};
         },
 
         refreshView: function(data) {
-            var html = $('#category-tmpl').tmpl({categories: data});
+            var html = $('#category-tmpl').tmpl(data);
             $('#bbs-contents').html(html);
         }
     };

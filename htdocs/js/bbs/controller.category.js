@@ -22,29 +22,27 @@ if (! bbs.controller) bbs.controller = {};
          */
         index: function() {
             var that = this;
-
             // fetch category data from API
-            bbs.apiclient.requestGet(this.url.get, {}, function(data) {
-                var categoryModel = bbs.model.category;
-                categoryModel.populate(data);
-
+            bbs.model.category.refresh({}, function(data) {
                 // Pass to view
-                bbs.view.category.refreshView(categoryModel.toArray());
+                bbs.view.category.refreshView({
+                    categories: bbs.model.category.toArray()
+                });
 
                 that.bindEvents();
+
             });
         },
 
-        bindEvents: function() {
-            var $root = $('#bbs-contents');
+         bindEvents: function() {
+             var $root = $('#bbs-contents');
+             $root.find('li.category').find('a').click(function() {
+                 var $this = $(this);
+                 var categoryId = $this.parents('li.category').find('input.id').val();
+                 bbs.router.change('/category/' + categoryId + '/thread/');
+             });
+         }
 
-            // click category link
-            $root.find('li.category').find('a').click(function() {
-                var $this = $(this);
-                var category_id = $this.parents('li.category').find('input.id').val();
-                bbs.router.change('/thread/' + category_id);
-            });
-        }
     };
 
     bbs.controller.category = new CategoryController();

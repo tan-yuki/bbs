@@ -17,6 +17,11 @@
 			</div>
 			<div id="bbs-contents" class="container">
 			</div>
+			<div id="modal-root" class="hide modal">
+			</div>
+			<div id="properties">
+				<input type="hidden" value="1" id="user_id">
+			</div>
 		</div><!-- / #container -->
 
 		<!-- category template -->
@@ -41,7 +46,7 @@
 		<!-- thread template -->
 		<script id="thread-tmpl" type="text/x-jquery-tmpl">
 			<div id="thread-header">
-				<h1>Thread list</h1>
+				<h1>Thread list: ${category.name}</h1>
 			</div>
 			<ul id="thread-list">
 				{{each(i, thread) threads}}
@@ -55,6 +60,30 @@
 				</li>
 				{{/each}}
 			</ul>
+			<p><a id="new-thread-link" href="javascript:void(0);">スレッドを作成する</a></p>
+			<p class="back"><a href="javascript:void(0);">&lt;&lt;&nbsp;カテゴリー一覧に戻る</a><p>
+			<div>
+				<input type="hidden" id="category_id" value="${category.id}" />
+			</div>
+		</script>
+
+		<script id="thread-notfound-tmpl" type="text/x-jquery-tmpl">
+			<div id="thread-header">
+				<h1>Thread list: ${category.name}</h1>
+			</div>
+			<p>スレッドが見つかりませんでした。</p>
+			<p><a href="javascript:void(0);">スレッドを作成する</a></p>
+			<p class="back"><a href="javascript:void(0);">&lt;&lt;&nbsp;カテゴリー一覧に戻る</a><p>
+		</script>
+
+		<script id="thread-modal-add-tmpl" type="text/x-jquery-tmpl">
+			<div class="modal-header"><h3>New thread name</h3></div>
+			<div class="modal-body">
+				<input type="text" id="new-thread-name">
+			</div>
+			<div class="modal-footer">
+				<a href="javascript:void(0);" id="thread-add-btn" class="btn btn-primary">Add</a>
+			</div>
 		</script>
 
 		<!-- post template -->
@@ -65,14 +94,12 @@
 					<div class="clearfix post-container">
 						<div class="post-header">
 							<ul class="clearfix">
-								<li class="poster-thumbnail-dummy">
-									<div>&nbsp;</div>
-								</li>
 								<li class="poster-thumbnail">
-									<img class="user-img-${post.user.id}" style="display:none;" alt="${post.user.name}">
+									<img class="user-img-${post.user_id}" alt="${post.user_name}">
 								</li>
+								<li class="poster-name">name: ${post.user_name}</li>
 								<li class="post-title">title: ${post.title}</li>
-								<li class="post-date">update date: ${post.update_date}</li>
+								<li class="post-date">posted date: ${post.create_date}</li>
 							</ul>
 						</div>
 						<div class="post-body">
@@ -85,6 +112,34 @@
 				</li>
 				{{/each}}
 			</ul>
+			<div id="add-new-post-link-container">
+				<p>
+				<a id="add-new-post-link" href="javascript:void(0);">投稿する</a>
+				</p>
+			</div>
+		</script>
+
+		<script id="post-modal-add-tmpl" type="text/x-jquery-tmpl">
+			<div class="modal-header"><h3>Post</h3></div>
+			<div class="modal-body" id="post-add-modal-body">
+				<dl>
+					<dt>
+						<dl>
+							<dt>Title</dt>
+							<dd><input type="text" name="title" id="new-post-title" class="post-data"></dd>
+						</dl>
+					</dt>
+					<dd>
+						<dl>
+							<dt>&nbsp;</dt>
+							<dd><textarea id="new-post-contents" name="contents" class="post-data"></textarea></dd>
+						</dl>
+					</dd>
+				</dl>
+			</div>
+			<div class="modal-footer">
+				<a href="javascript:void(0);" id="post-add-btn" class="btn btn-primary">Add</a>
+			</div>
 		</script>
 
 
@@ -99,6 +154,7 @@
 		<script type="text/javascript" src="/js/lib/StateMachine/src/StateMachine.js" charset="UTF-8"></script>
 
 		<!-- js for bbs -->
+		<script type="text/javascript" src="/js/bbs/util.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="/js/bbs/apiclient.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="/js/bbs/model.category.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="/js/bbs/model.thread.js" charset="UTF-8"></script>
