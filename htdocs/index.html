@@ -90,7 +90,7 @@
 		<script id="post-tmpl" type="text/x-jquery-tmpl">
 			<ul id="post-list">
 				{{each(i, post) posts}}
-				<li id="${post._id}" class="post">
+				<li id="${post._id}" data-userid="${post.user_id}" class="post">
 					<div class="clearfix post-container">
 						<div class="post-header">
 							<ul class="clearfix">
@@ -112,10 +112,17 @@
 				</li>
 				{{/each}}
 			</ul>
-			<div id="add-new-post-link-container">
-				<p>
-				<a id="add-new-post-link" href="javascript:void(0);">投稿する</a>
-				</p>
+			<div id="post-side-menu">
+				<div id="add-new-post-link-container">
+					<p>
+					<a id="add-new-post-link" href="javascript:void(0);">投稿する</a>
+					</p>
+				</div>
+				<div class="back-wrapper">
+					<p>
+					<a class="back" href="javascript:void(0);">&lt;&lt;&nbsp;スレッド一覧に戻る</a>
+					</p>
+				</div>
 			</div>
 		</script>
 

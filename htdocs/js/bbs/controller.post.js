@@ -20,7 +20,7 @@ if (! bbs.controller) bbs.controller = {};
     PostController.prototype = {
         url: {
             get:  '/api/bbs/post/',
-            save: '/api/bbs/post/save/'
+            save: '/api/bbs/post/save'
         },
 
         /**
@@ -76,8 +76,30 @@ if (! bbs.controller) bbs.controller = {};
         },
 
         bindEvents: function(category_id, thread_id) {
+            var $root = $('#bbs-contents');
+
+            // post button
             $('#add-new-post-link-container').click(function(e) {
                 bbs.router.change('/category/' + category_id + '/thread/' + thread_id + '/post/add/');
+            });
+
+            // go back to thread list link
+            $root.find('a.back').click(function() {
+                bbs.router.change('/category/' + category_id + '/thread/');
+            });
+
+            var userId = $('#user_id').val();
+            var $postList = $root.find('li.post');
+            $postList.mouseenter(function() {
+                var $this = $(this);
+                var postUserId = $this.data('userid');
+
+                if (userId == postUserId) {
+                    $this.find('.post-body').addClass('active');
+                }
+            });
+            $postList.mouseleave(function() {
+                $postList.find('.post-body').removeClass('active');
             });
         },
 
@@ -94,10 +116,6 @@ if (! bbs.controller) bbs.controller = {};
 
             // submit saving thread
             $modal.find('#post-add-btn').click(function() {
-                if (! $input.val()) {
-                    return false;
-                }
-
                 var params = {
                     user_id:     $('#user_id').val(),
                     thread_id:   thread_id,
@@ -114,7 +132,7 @@ if (! bbs.controller) bbs.controller = {};
             });
             // when close modal
             $modal.on('hidden', function() {
-                bbs.router.change('/category/' + category_id + '/thread/');
+                bbs.router.change('/category/' + category_id + '/thread/' + thread_id + '/post/');
             });
         }
 

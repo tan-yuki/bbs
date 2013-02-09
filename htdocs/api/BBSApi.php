@@ -155,8 +155,8 @@ class BBSApi {
 			$post->set('contents',    $params['contents']);
 		}
 
-		$thread->set_expr('update_date', 'NOW()');
-		$thread->save();
+		$post->set_expr('update_date', 'NOW()');
+		$post->save();
 
 		return null;
 	}
